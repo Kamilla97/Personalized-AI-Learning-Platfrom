@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ content.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+        <h1>{{ content.title }}</h1>
+        <p>{{ content.description }}</p>
+        <div class="ratio ratio-16x9 mb-4">
+            <iframe src="{{ content.content_url | replace('watch?v=', 'embed/') }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <h3>Feedback</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="feedback" class="form-label">Leave your feedback:</label>
+                <textarea id="feedback" name="feedback" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+
+        <h4 class="mt-4">Other Feedback:</h4>
+        <ul class="list-group">
+            {% for feedback in feedback_list %}
+            <li class="list-group-item">
+                <strong>User {{ feedback.user_id }}:</strong> {{ feedback.feedback_text }}
+            </li>
+            {% else %}
+            <li class="list-group-item">No feedback yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('recommendations') }}" class="btn btn-secondary mt-4">Back to Recommendations</a>
+    </div>
+{% endblock %}

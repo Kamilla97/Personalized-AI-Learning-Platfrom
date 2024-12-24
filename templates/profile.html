@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Your Profile</h1>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">User Details</h5>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Skill Level:</strong> {{ user.skill_level }}</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Quiz Statistics</h5>
+            <p><strong>Total Quizzes Taken:</strong> {{ total_quizzes }}</p>
+            <p><strong>Average Score:</strong> {{ average_score|round(2) }}</p>
+            <p><strong>Current Skill Level:</strong> {{ user.skill_level }}</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Readiness Status</h5>
+        <p><strong>Status:</strong> {{ readiness }}</p>
+    </div>
+</div>
+
+    <h3 class="mt-4">Quick Links</h3>
+    <div class="list-group">
+        <a href="{{ url_for('quiz', question_id=1) }}" class="list-group-item list-group-item-action">Take Quiz</a>
+        <a href="{{ url_for('recommendations') }}" class="list-group-item list-group-item-action">See Recommendations</a>
+        <a href="{{ url_for('progress') }}" class="list-group-item list-group-item-action">View Progress</a>
+    </div>
+</div>
+{% endblock %}

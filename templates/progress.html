@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Progress{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Your Progress</h1>
+    <p>Here is your quiz history and progress over time:</p>
+
+    <!-- Quiz History Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Skill Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in quiz_results %}
+            <tr>
+                <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ result.score }}</td>
+                <td>{{ result.skill_level }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">No quiz history available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Chart for Visualizing Progress -->
+    <h3 class="mt-5">Performance Over Time</h3>
+    <canvas id="progressChart" width="400" height="200"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const progressData = {{ progress_data | tojson }};
+    const labels = progressData.map(item => new Date(item.date).toLocaleDateString());
+    const scores = progressData.map(item => item.score);
+
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quiz Scores',
+                data: scores,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.3,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { title: { display: true, text: 'Date' } },
+                y: { title: { display: true, text: 'Score' } },
+            }
+        }
+    });
+</script>
+{% endblock %}

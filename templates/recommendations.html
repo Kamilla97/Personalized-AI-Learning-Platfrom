@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+        <h1>Recommended Content</h1>
+        <p>Your skill level: <strong>{{ skill_level }}</strong></p>
+        <div class="row">
+            {% for item in content %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description[:100] }}...</p>
+                        <a href="{{ url_for('content_details', content_id=item.id) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="/" class="btn btn-secondary">Return to Dashboard</a>
+    </div>
+{% endblock %}

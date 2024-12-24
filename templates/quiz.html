@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Quiz</h1>
+                    <h2 class="card-text mt-4">Question:</h2>
+                    <p class="lead">{{ question.question }}</p>
+
+                    {% if feedback %}
+                        <div class="alert alert-info text-center">
+                            <strong>{{ feedback }}</strong>
+                        </div>
+                    {% endif %}
+
+                    <form method="POST">
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" name="option" value="A" id="optionA" required>
+                            <label for="optionA" class="form-check-label">{{ question.option_a }}</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" name="option" value="B" id="optionB">
+                            <label for="optionB" class="form-check-label">{{ question.option_b }}</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" name="option" value="C" id="optionC">
+                            <label for="optionC" class="form-check-label">{{ question.option_c }}</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" name="option" value="D" id="optionD">
+                            <label for="optionD" class="form-check-label">{{ question.option_d }}</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

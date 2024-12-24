@@ -1,0 +1,72 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="mb-4">Welcome to Your Dashboard</h1>
+        <p class="lead">What would you like to do today?</p>
+    </div>
+
+    <div class="row mt-5">
+        <!-- Take Quiz -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Take Quiz</h5>
+                    <p class="card-text">Test your knowledge and get personalized recommendations based on your performance.</p>
+                    <a href="{{ url_for('quiz', question_id=1) }}" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- See Recommendations -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">See Recommendations</h5>
+                    <p class="card-text">Explore content curated just for you based on your skill level.</p>
+                    <a href="{{ url_for('recommendations') }}" class="btn btn-success">View Recommendations</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Progress -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">View Progress</h5>
+                    <p class="card-text">Track your quiz history and progress over time.</p>
+                    <a href="{{ url_for('progress') }}" class="btn btn-info">Check Progress</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Feedback -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">See Profile</h5>
+                    <p class="card-text">Manage your profile.</p>
+                    <a href="{{ url_for('profile') }}" class="btn btn-warning">Go to Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="col-md-4 mb-4 offset-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Logout</h5>
+                    <p class="card-text">Finish your session and come back anytime.</p>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
